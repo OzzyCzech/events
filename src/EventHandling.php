@@ -29,7 +29,7 @@ trait EventHandling {
 	 */
 	public function once($event, callable $listener, $priority = 10) {
 		$onceListener = function () use (&$onceListener, $event, $listener) {
-			$this->removeListener($event, $onceListener);
+			$this->removeListeners($event, $onceListener);
 			call_user_func_array($listener, func_get_args());
 		};
 
@@ -46,28 +46,26 @@ trait EventHandling {
 	}
 
 	/**
-	 * Remove listener from event
+	 * Remove one or all listeners from event
 	 *
 	 * @param string $event
 	 * @param callable $listener
+	 * @return bool
 	 */
-	public function remove($event, callable $listener) {
-		if (isset($this->listeners[$event])) {
+	public function removeListeners($event, callable $listener = null) {
+		if (!isset($this->listeners[$event])) return;
+
+		if ($listener === null) {
+			unset($this->listeners[$event]);
+		} else {
 			foreach ($this->listeners[$event] as $priority => $listeners) {
 				if (false !== ($index = array_search($listener, $listeners, true))) {
 					unset($this->listeners[$event][$priority][$index]);
 				}
 			}
 		}
-	}
 
-	/**
-	 * Remove event
-	 *
-	 * @param string $event
-	 */
-	public function removeAll($event = null) {
-		unset($this->listeners[$event]);
+		return true;
 	}
 
 	/**
@@ -91,6 +89,14 @@ trait EventHandling {
 		foreach ($this->listeners($event) as $listener) {
 			call_user_func_array($listener, $args);
 		}
+	}
+
+	/**
+	 * @param $event
+	 * @return bool
+	 */
+	public function exists($event) {
+		return isset($this->listeners[$event]);
 	}
 
 	/**

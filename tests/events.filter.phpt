@@ -44,7 +44,7 @@ $event->on(
 
 Assert::same(3, count($event->listeners('event')));
 Assert::same('last win', $event->filter('event', 'some input data'));
-$event->remove('event', $func); // remove handler
+$event->removeListeners('event', $func); // remove handler
 Assert::same(2, count($event->listeners('event')));
 Assert::same('override output', $event->filter('event', 'some input data'));
 

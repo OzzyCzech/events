@@ -2,7 +2,7 @@
 /**
  * @author Roman Ozana <ozana@omdesign.cz>
  */
-use om\GlobalEvents;
+use om\Events;
 
 /**
  * @param string $event
@@ -10,7 +10,7 @@ use om\GlobalEvents;
  * @param int $priority
  */
 function on($event, callable $listener, $priority = 10) {
-	return GlobalEvents::instance()->on($event, $listener, $priority);
+	return Events::instance()->on($event, $listener, $priority);
 }
 
 /**
@@ -19,14 +19,15 @@ function on($event, callable $listener, $priority = 10) {
  * @param int $priority
  */
 function once($event, callable $listener, $priority = 10) {
-	return GlobalEvents::instance()->once($event, $listener, $priority);
+	return Events::instance()->once($event, $listener, $priority);
 }
 
 /**
  * @param string $event
+ * @return mixed
  */
 function trigger($event) {
-	return GlobalEvents::instance()->trigger($event);
+	return call_user_func_array([Events::instance(), 'trigger'], func_get_args());
 }
 
 /**
@@ -35,35 +36,28 @@ function trigger($event) {
  * @return mixed
  */
 function filter($event, $value = null) {
-	return GlobalEvents::instance()->filter($event, $value);
+	return call_user_func_array([Events::instance(), 'filter'], func_get_args());
 }
 
 /**
  * @return array
  */
 function getEvents() {
-	return GlobalEvents::instance()->events();
+	return Events::instance()->events();
 }
 
 /**
  * @param string $event
  * @param callable $listener
  */
-function removeEventListener($event, callable $listener) {
-	return GlobalEvents::instance()->remove($event, $listener);
-}
-
-/**
- * @param null $event
- */
-function removeAllEventListeners($event = null) {
-	return GlobalEvents::instance()->removeAll($event);
+function removeListeners($event, callable $listener = null) {
+	Events::instance()->removeListeners($event, $listener);
 }
 
 /**
  * @param $event
  * @return array
  */
-function getEventListeners($event) {
-	return GlobalEvents::instance()->listeners($event);
+function getListeners($event) {
+	return Events::instance()->listeners($event);
 }
