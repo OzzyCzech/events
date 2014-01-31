@@ -2,6 +2,8 @@
 
 Super simple event dispatching library for PHP
 
+[![Build Status](https://travis-ci.org/OzzyCzech/events.png?branch=master)](https://travis-ci.org/OzzyCzech/events)
+
 ## Examples
 
 function way
@@ -56,5 +58,3 @@ prioritizing events handlers
     echo filter('title', 'text'); // <h1><a href="#title">text</a></h1>
 
 > Please notice that default event priority is 10!
-
-[![Build Status](https://travis-ci.org/OzzyCzech/events.png?branch=master)](https://travis-ci.org/OzzyCzech/events)
