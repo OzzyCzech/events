@@ -1,6 +1,9 @@
 {
 	"name": "om/events",
 	"description": "Super simple event dispatching library for PHP",
+	"keywords": ["event", "simple", "handle", "trigger", "filter"],
+	"homepage": "http://www.omdesign.cz",
+	"license": ["BSD-3-Clause"],
 	"authors": [
 		{
 			"name": "Roman Ozana",
