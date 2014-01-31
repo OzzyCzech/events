@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Roman Ožana <ozana@omdesign.cz>
  */

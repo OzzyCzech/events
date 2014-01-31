@@ -27,7 +27,7 @@ trait EventHandling {
 	 */
 	public function once($event, callable $listener, $priority = 10) {
 		$onceListener = function () use (&$onceListener, $event, $listener) {
-			$this->removeListeners($event, $onceListener);
+			$this->off($event, $onceListener);
 			call_user_func_array($listener, func_get_args());
 		};
 
@@ -50,7 +50,7 @@ trait EventHandling {
 	 * @param callable $listener
 	 * @return bool
 	 */
-	public function removeListeners($event, callable $listener = null) {
+	public function off($event, callable $listener = null) {
 		if (!isset($this->listeners[$event])) return;
 
 		if ($listener === null) {

@@ -41,7 +41,7 @@ function filter($event, $value = null) {
 /**
  * @return array
  */
-function getEvents() {
+function events() {
 	return Events::instance()->events();
 }
 
@@ -49,14 +49,14 @@ function getEvents() {
  * @param string $event
  * @param callable $listener
  */
-function removeListeners($event, callable $listener = null) {
-	Events::instance()->removeListeners($event, $listener);
+function off($event, callable $listener = null) {
+	Events::instance()->off($event, $listener);
 }
 
 /**
  * @param $event
  * @return array
  */
-function getListeners($event) {
+function listeners($event) {
 	return Events::instance()->listeners($event);
 }

@@ -57,3 +57,19 @@ prioritizing events handlers
     echo filter('title', 'text'); // <h1><a href="#title">text</a></h1>
 
 > Please notice that default event priority is 10!
+
+## Advanced
+
+Add and remove listener
+
+    $handler = function() { };
+    on('event', $handler);
+    off('event', $handler);
+
+Add and remove all listeners
+
+    $handler = function() { };
+    on('event', $handler);
+    on('event', $handler);
+    on('event', $handler);
+    off('event');

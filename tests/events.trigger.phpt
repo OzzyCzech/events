@@ -47,5 +47,7 @@ $event->trigger('event2', 'a', 'b', 'c');
 
 // remove events
 Assert::same(['event', 'event2'], $event->events());
-$event->removeListeners('event2');
+$event->off('event2');
 Assert::same(['event'], $event->events());
+
+
