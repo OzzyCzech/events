@@ -1,6 +1,4 @@
 <?php
-namespace om;
-
 use Tester\Assert;
 
 require __DIR__ . '/../vendor/autoload.php';

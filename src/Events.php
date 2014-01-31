@@ -1,6 +1,4 @@
 <?php
-namespace om;
-
 /**
  * @author Roman Ožana <ozana@omdesign.cz>
  */

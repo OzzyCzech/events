@@ -2,7 +2,6 @@
 /**
  * @author Roman Ozana <ozana@omdesign.cz>
  */
-use om\Events;
 
 /**
  * @param string $event
