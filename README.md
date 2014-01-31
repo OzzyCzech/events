@@ -22,16 +22,16 @@ function way
 
 static class way
 
-		Trigger::on('event', function() {
-	    echo "wow it's work";
-		});
+    Trigger::on('event', function() {
+      echo "wow it's work";
+    });
 
-		Trigger::event(); // print wow it's work
+    Trigger::event(); // print wow it's work
 
-		Filter::register('price', function($price) {
+    Filter::register('price', function($price) {
       return (int)$price . ' USD';
-		});
-		echo Filter::price(100); // print 100 USD
+    });
+    echo Filter::price(100); // print 100 USD
 
 own way
 
@@ -48,10 +48,10 @@ prioritizing events handlers
       return '<h1>' . $title . '</h1>';
     }, 20);
 
-		echo filter('title', 'text'); // <h1>text</h1>
+    echo filter('title', 'text'); // <h1>text</h1>
 
     on('title', function ($title) {
-		  return '<a href="#title">' . $title . '</a>';
+      return '<a href="#title">' . $title . '</a>';
     });
 
     echo filter('title', 'text'); // <h1><a href="#title">text</a></h1>
