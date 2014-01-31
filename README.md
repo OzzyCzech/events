@@ -4,7 +4,7 @@ Super simple event dispatching library for PHP
 
 ## Examples
 
-Function way
+function way
 
     on(
     	'event', function () {
@@ -20,7 +20,7 @@ Function way
 
     echo filter('price', 100); // print 100 USD
 
-Static class way
+static class way
 
 		Trigger::on('event', function() {
 			echo "wow it's work";
@@ -34,5 +34,10 @@ Static class way
 		});
 		echo Filter::price(100); // print 100 USD
 
+own way
+
+	class Wtf {
+		use EventHandling;
+	}
 
 [![Build Status](https://travis-ci.org/OzzyCzech/events.png?branch=master)](https://travis-ci.org/OzzyCzech/events)
