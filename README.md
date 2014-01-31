@@ -9,13 +9,13 @@ Super simple event dispatching library for PHP
 function way
 
     on('event', function () {
-    		echo "wow it's work";
+      echo "wow it's work";
     });
 
     trigger('event'); // print wow it's work
 
     on('price', function($price) {
-       return (int)$price . ' USD';
+      return (int)$price . ' USD';
     });
 
     echo filter('price', 100); // print 100 USD
@@ -23,14 +23,13 @@ function way
 static class way
 
 		Trigger::on('event', function() {
-			echo "wow it's work";
+	    echo "wow it's work";
 		});
 
 		Trigger::event(); // print wow it's work
 
-		Filter::register('price',
-			function($price) {
-				return (int)$price . ' USD';
+		Filter::register('price', function($price) {
+      return (int)$price . ' USD';
 		});
 		echo Filter::price(100); // print 100 USD
 
@@ -52,7 +51,7 @@ prioritizing events handlers
 		echo filter('title', 'text'); // <h1>text</h1>
 
     on('title', function ($title) {
-			return '<a href="#title">' . $title . '</a>';
+		  return '<a href="#title">' . $title . '</a>';
     });
 
     echo filter('title', 'text'); // <h1><a href="#title">text</a></h1>
