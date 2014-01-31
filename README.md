@@ -6,11 +6,9 @@ Super simple event dispatching library for PHP
 
 function way
 
-    on(
-    	'event', function () {
+    on('event', function () {
     		echo "wow it's work";
-    	}
-    );
+    });
 
     trigger('event'); // print wow it's work
 
@@ -36,9 +34,12 @@ static class way
 
 own way
 
-	class Wtf {
-		use EventHandling;
-	}
+    class Wtf {
+      use EventHandling; // trait way
+    }
+
+    $wtf = new Wtf();
+    $wtf->on('something', function() {});
 
 prioritizing events handlers
 
