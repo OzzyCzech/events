@@ -73,3 +73,8 @@ Add and remove all listeners
     on('event', $handler);
     on('event', $handler);
     off('event');
+
+Get all events
+
+   $events = events();
+   $listeners = listeners('event');
