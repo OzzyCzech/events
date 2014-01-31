@@ -40,4 +40,20 @@ own way
 		use EventHandling;
 	}
 
+prioritizing events handlers
+
+    on('title', function ($title) {
+      return '<h1>' . $title . '</h1>';
+    }, 20);
+
+		echo filter('title', 'text'); // <h1>text</h1>
+
+    on('title', function ($title) {
+			return '<a href="#title">' . $title . '</a>';
+    });
+
+    echo filter('title', 'text'); // <h1><a href="#title">text</a></h1>
+
+> Please notice that default event priority is 10!
+
 [![Build Status](https://travis-ci.org/OzzyCzech/events.png?branch=master)](https://travis-ci.org/OzzyCzech/events)

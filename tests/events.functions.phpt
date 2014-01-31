@@ -62,3 +62,22 @@ on('event4', [$t = new TestTrigger, 'eventListener']);
 trigger('event4', 1, 1, 1, 1, 1, 1);
 
 Assert::same(6, $t->value);
+
+
+// prioritizing events order
+
+on(
+	'title', function ($title) {
+		return '<h1>' . $title . '</h1>';
+	}, 20
+);
+
+Assert::same('<h1>text</h1>', filter('title', 'text'));
+
+on(
+	'title', function ($title) {
+		return '<a href="#title">' . $title . '</a>';
+	}
+);
+
+Assert::same('<h1><a href="#title">text</a></h1>', filter('title', 'text'));
