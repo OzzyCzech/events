@@ -76,5 +76,5 @@ Add and remove all listeners
 
 Get all events
 
-   $events = events();
-   $listeners = listeners('event');
+    $events = events();
+    $listeners = listeners('event');
