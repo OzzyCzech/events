@@ -35,6 +35,26 @@ function trigger($event) {
 	return call_user_func_array([Events::instance(), 'trigger'], func_get_args());
 }
 
+/**
+ * Register filter listener on event
+ *
+ * @param string $event
+ * @param callable $listener
+ * @param int $priority
+ */
+function add_action($event, callable $listener, $priority = 10) {
+	return Events::instance()->on($event, $listener, $priority);
+}
+
+/**
+ * Trigger action
+ *
+ * @param string $event
+ * @return mixed
+ */
+function action($event) {
+	return call_user_func_array([Events::instance(), 'trigger'], func_get_args());
+}
 
 /**
  * Register filter listener on event
