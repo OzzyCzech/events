@@ -51,3 +51,7 @@ $event->off('event2');
 Assert::same(['event'], $event->events());
 
 
+// empty event handlers
+
+$event = new Events();
+$event->trigger('what ever you want');

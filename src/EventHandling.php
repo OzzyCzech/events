@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Roman Ozana <ozana@omdesign.cz>
  */
@@ -84,7 +85,7 @@ trait EventHandling {
 		$args = func_get_args();
 		$event = array_shift($args);
 
-		foreach ($this->listeners($event) as $listener) {
+		foreach ((array)$this->listeners($event) as $listener) {
 			call_user_func_array($listener, $args);
 		}
 	}
