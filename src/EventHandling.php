@@ -86,7 +86,7 @@ trait EventHandling {
 		$event = array_shift($args);
 
 		foreach ((array)$this->listeners($event) as $listener) {
-			call_user_func_array($listener, $args);
+			if (call_user_func_array($listener, $args) === false) break; // return false => stop propagation
 		}
 	}
 
