@@ -65,7 +65,7 @@ Prioritizing events handlers:
 
     echo filter('title', 'text'); // <h1><a href="#title">text</a></h1>
 
-> Please notice that default event priority is 10!
+**Please notice that default event priority is 10!**
 
 ## Advanced examples
 
@@ -85,10 +85,10 @@ Add and remove all listeners:
 
 Stop propagation:
 
-		on('event', function () { echo 'a'; });
-		on('event', function () { echo 'b'; });
-		on('event', function () { echo 'c'; return false; }); // stop propagation
-		on('event', function () { echo 'd'; });
+    on('event', function () { echo 'a'; });
+    on('event', function () { echo 'b'; });
+    on('event', function () { echo 'c'; return false; }); // stop propagation
+    on('event', function () { echo 'd'; });
 		
 		trigger('event'); // print abc
 		
