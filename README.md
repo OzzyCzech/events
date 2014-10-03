@@ -90,7 +90,7 @@ Stop propagation:
     on('event', function () { echo 'c'; return false; }); // stop propagation
     on('event', function () { echo 'd'; });
 		
-		trigger('event'); // print abc
+    trigger('event'); // print abc
 		
 Get all events:
 
