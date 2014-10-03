@@ -1,12 +1,12 @@
 # Events
 
-Super simple event dispatching library for PHP
+Super simple event dispatching library for PHP with filters, prioritizing, removing handlers and stop propagation.
 
 [![Build Status](https://travis-ci.org/OzzyCzech/events.png?branch=master)](https://travis-ci.org/OzzyCzech/events) [![Latest Stable Version](https://poser.pugx.org/om/events/v/stable.png)](https://packagist.org/packages/om/events) [![Total Downloads](https://poser.pugx.org/om/events/downloads.png)](https://packagist.org/packages/om/events) [![Latest Unstable Version](https://poser.pugx.org/om/events/v/unstable.png)](https://packagist.org/packages/om/events) [![License](https://poser.pugx.org/om/events/license.png)](https://packagist.org/packages/om/events)
 
 ## Examples
 
-function way
+Use function.php shortcut functions:
 
     on('event', function () {
       echo "wow it's work";
@@ -14,13 +14,22 @@ function way
 
     trigger('event'); // print wow it's work
 
-    on('price', function($price) {
+Filter value example: 
+ 
+    add_filter('price', function($price) {
       return (int)$price . ' USD';
     });
-
+    
     echo filter('price', 100); // print 100 USD
+        
+    add_filter('price', function($price) {
+      return 'The price is: ' . $price ;
+		});
+		
+		echo filter('price', 100); // print The price is: 100 USD
 
-static class way
+
+Static Class from anywhere in code:
 
     Trigger::on('event', function() {
       echo "wow it's work";
@@ -33,7 +42,7 @@ static class way
     });
     echo Filter::price(100); // print 100 USD
 
-own way
+Use EventHandling on your class: 
 
     class Wtf {
       use EventHandling; // trait way
@@ -42,7 +51,7 @@ own way
     $wtf = new Wtf();
     $wtf->on('something', function() {});
 
-prioritizing events handlers
+Prioritizing events handlers:
 
     on('title', function ($title) {
       return '<h1>' . $title . '</h1>';
@@ -58,15 +67,15 @@ prioritizing events handlers
 
 > Please notice that default event priority is 10!
 
-## Advanced
+## Advanced examples
 
-Add and remove listener
+Add and remove listener:
 
     $handler = function() { };
     on('event', $handler);
     off('event', $handler);
 
-Add and remove all listeners
+Add and remove all listeners:
 
     $handler = function() { };
     on('event', $handler);
@@ -74,7 +83,16 @@ Add and remove all listeners
     on('event', $handler);
     off('event');
 
-Get all events
+Stop propagation:
+
+		on('event', function () { echo 'a'; });
+		on('event', function () { echo 'b'; });
+		on('event', function () { echo 'c'; return false; }); // stop propagation
+		on('event', function () { echo 'd'; });
+		
+		trigger('event'); // print abc
+		
+Get all events:
 
     $events = events();
     $listeners = listeners('event');
