@@ -5,7 +5,9 @@
 use Tester\Assert;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/events.php';
 \Tester\Environment::setup();
+
 
 $a = function () {
 	return 'a';
@@ -17,15 +19,13 @@ $c = function () {
 	return 'c';
 };
 
-$event = new Events();
-
 // event order
 
-$event->on('event', $a, 30);
-$event->on('event', $c, 10);
-$event->on('event', $b, 20);
+on('event', $a, 30);
+on('event', $c, 10);
+on('event', $b, 20);
 
-$listeners = $event->listeners('event');
+$listeners = listeners('event');
 
 Assert::same('c', $listeners[0]());
 Assert::same('b', $listeners[1]());
@@ -33,9 +33,9 @@ Assert::same('a', $listeners[2]());
 
 // check filter order
 
-Assert::same('a', $event->filter('event'));
+Assert::same('a', filter('event'));
 
-$event->on(
+on(
 	'event2', function ($a, $b, $c) {
 		Assert::same('a', $a);
 		Assert::same('b', $b);
@@ -43,15 +43,11 @@ $event->on(
 	}
 );
 
-$event->trigger('event2', 'a', 'b', 'c');
+fire('event2', 'a', 'b', 'c');
 
 // remove events
-Assert::same(['event', 'event2'], $event->events());
-$event->off('event2');
-Assert::same(['event'], $event->events());
+Assert::same(['event', 'event2'], array_keys((array)events()));
+off('event2');
+Assert::same(['event'], array_keys((array)events()));
 
-
-// empty event handlers
-
-$event = new Events();
-$event->trigger('what ever you want');
+fire('what ever you want');

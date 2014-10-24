@@ -5,53 +5,52 @@
 use Tester\Assert;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/events.php';
 \Tester\Environment::setup();
 
-$event = new Events();
+Assert::same(filter('not exists event', 'my input will be result'), 'my input will be result');
 
-Assert::same($event->filter('not exists event', 'my input will be result'), 'my input will be result');
-
-$event->on(
+on(
 	'event', function ($input) {
 		Assert::same($input, 'some input data');
 		return 'filtered result';
 	}
 );
 
-Assert::same('filtered result', $event->filter('event', 'some input data'));
+Assert::same('filtered result', filter('event', 'some input data'));
 
 // multiple filters
 
-$event->on(
+on(
 	'event', function ($input) {
 		return 'override output';
 	}
 );
 
-Assert::same(2, count($event->listeners('event')));
-Assert::same('override output', $event->filter('event', 'some input data'));
+Assert::same(2, count(listeners('event')));
+Assert::same('override output', filter('event', 'some input data'));
 
 // add and remove event test
 
-$event->on(
+on(
 	'event', $func = function ($input) {
-		       return 'last win';
-	       }
+		return 'last win';
+	}
 );
 
-Assert::same(3, count($event->listeners('event')));
-Assert::same('last win', $event->filter('event', 'some input data'));
-$event->off('event', $func); // remove handler
-Assert::same(2, count($event->listeners('event')));
-Assert::same('override output', $event->filter('event', 'some input data'));
+Assert::same(3, count(listeners('event')));
+Assert::same('last win', filter('event', 'some input data'));
+off('event', $func); // remove handler
+Assert::same(2, count(listeners('event')));
+Assert::same('override output', filter('event', 'some input data'));
 
 
-$event->on(
+on(
 	'event2', function ($array) {
 		$array[] = 'add';
 		return $array;
 	}
 );
 
-Assert::same(['add'], $event->filter('event2'));
-Assert::same(['a', 'b', 'c', 'add'], $event->filter('event2', ['a', 'b', 'c']));
+Assert::same(['add'], filter('event2'));
+Assert::same(['a', 'b', 'c', 'add'], filter('event2', ['a', 'b', 'c']));

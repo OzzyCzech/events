@@ -5,28 +5,27 @@
 use Tester\Assert;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/events.php';
 \Tester\Environment::setup();
-
-$events = new Events();
 
 
 // do not stop propagation after string
 {
 	$calls = 0;
-	$events->on(
+	on(
 		'nonstop', function () {
 			global $calls;
 			$calls++;
 			return '0'; // return something else then false
 		}
 	);
-	$events->on(
+	on(
 		'nonstop', function () {
 			global $calls;
 			$calls++;
 		}
 	);
-	$events->trigger('nonstop');
+	fire('nonstop');
 	Assert::same(2, $calls);
 }
 
@@ -34,19 +33,19 @@ $events = new Events();
 // stop propagation after false
 {
 	$calls = 0;
-	$events->on(
+	on(
 		'stop', function () {
 			global $calls;
 			$calls++;
 			return false; // stop propagation
 		}
 	);
-	$events->on(
+	on(
 		'stop', function () {
 			global $calls;
 			$calls++;
 		}
 	);
-	$events->trigger('stop');
+	fire('stop');
 	Assert::same(1, $calls);
 }

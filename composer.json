@@ -1,7 +1,13 @@
 {
 	"name": "om/events",
 	"description": "Super simple event dispatching library for PHP",
-	"keywords": ["event", "simple", "handle", "trigger", "filter"],
+	"keywords": [
+		"event",
+		"simple",
+		"handle",
+		"trigger",
+		"filter"
+	],
 	"homepage": "http://www.omdesign.cz",
 	"license": ["BSD-3-Clause"],
 	"authors": [
@@ -15,8 +21,5 @@
 	},
 	"require-dev": {
 		"nette/tester": "*"
-	},
-	"autoload": {
-		"classmap": ["src"]
 	}
 }

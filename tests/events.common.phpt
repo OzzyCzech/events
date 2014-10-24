@@ -5,34 +5,33 @@
 use Tester\Assert;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/events.php';
 \Tester\Environment::setup();
 
 
-class TestTrigger {
-	public $value;
+{ // trigger test
 
-	public function eventListener() {
-		$this->value = array_sum(func_get_args());
-	}
+	$var = null;
+
+	on(
+		'set.true', function () {
+			global $var;
+			$var = true;
+		}
+	);
+
+	fire('set.true');
+
+	Assert::true($var);
 }
 
-Trigger::on('eventName', [$t = new TestTrigger, 'eventListener']);
-Trigger::eventName(1, 1, 1, 1);
+{ // variable filter test
 
-Assert::same(4, $t->value);
+	add_filter(
+		'var', function () {
+			return true;
+		}
+	);
 
-
-Filter::register(
-	'data', function ($data, $x = 2) {
-		return $data * $x;
-	}
-);
-
-Assert::same(0, Filter::data());
-Assert::same(0, Filter::data(2, 0));
-Assert::same(4, Filter::data(2));
-Assert::same(8, Filter::data(2, 4));
-
-Assert::same(null, Filter::nothing());
-Assert::same(1, Filter::just_return(1));
-
+	Assert::true(filter('var', false));
+}
