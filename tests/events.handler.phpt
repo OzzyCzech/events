@@ -20,7 +20,7 @@ require __DIR__ . '/../src/events.php';
 	Assert::same('default renderer', $response);
 }
 
-{ // override handler test
+{ // override default handler test
 	on(
 		'render', function () {
 			global $handler;
@@ -35,4 +35,29 @@ require __DIR__ . '/../src/events.php';
 	);
 
 	Assert::same('new renderer', $response);
+}
+
+{ // handler variables
+
+	$response = handle(
+		'variables', function ($data) {
+			return $data;
+		}, 'an example data'
+	);
+
+	Assert::same('an example data', $response);
+
+	on(
+		'variables', function ($data) {
+			return $data . ' two';
+		}
+	);
+
+	$response = handle(
+		'variables', function ($data) {
+			return $data;
+		}, 'an example data'
+	);
+
+	Assert::same('an example data two', $response);
 }

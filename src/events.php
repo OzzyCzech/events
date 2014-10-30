@@ -87,9 +87,12 @@ function fire($event) {
 	$args = func_get_args();
 	$event = array_shift($args);
 
+	$out = [];
 	foreach ((array)listeners($event) as $listener) {
-		if (call_user_func_array($listener, $args) === false) break; // return false; // will break
+		if (($out[] = call_user_func_array($listener, $args)) === false) break; // return false ==> stop propagation
 	}
+
+	return $out;
 }
 
 /**
@@ -136,6 +139,16 @@ function filter($event, $value = null) {
  * @return mixed
  */
 function action($event) {
+	return call_user_func_array('\fire', func_get_args());
+}
+
+/**
+ * Trigger an action.
+ *
+ * @param $event
+ * @return mixed
+ */
+function trigger($event) {
 	return call_user_func_array('\fire', func_get_args());
 }
 
