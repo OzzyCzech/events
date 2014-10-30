@@ -82,6 +82,7 @@ function off($event, callable $listener = null) {
  * Trigger events
  *
  * @param $event
+ * @return array
  */
 function fire($event) {
 	$args = func_get_args();
