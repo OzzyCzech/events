@@ -51,8 +51,17 @@ Prioritizing events handlers:
 
 Handle example
 
-    on('render', function () { return 'my custom renderer';	} );
-    echo handle('render', function () {	return 'default renderer'; } );
+    on(
+      'render', function () {
+        return 'my custom renderer';
+      }
+    );
+    
+    echo handle(
+      'render', function () {
+        return 'default renderer';
+      }
+    );
 
 Function handle calls immediately only last listener from event listeners and return result value.
 		
