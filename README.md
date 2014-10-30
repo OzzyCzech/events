@@ -29,9 +29,9 @@ Filter value example:
         
     add_filter('price', function($price) {
       return 'The price is: ' . $price ;
-		});
-		
-		echo filter('price', 100); // print The price is: 100 USD
+    });
+    
+    echo filter('price', 100); // print The price is: 100 USD
 
 Prioritizing events handlers:
 
@@ -64,7 +64,7 @@ Handle example
     );
 
 Function handle calls immediately only last listener from event listeners and return result value.
-		
+    
 ## Advanced examples
 
 Add and remove listener:
@@ -87,9 +87,9 @@ Stop propagation:
     on('event', function () { echo 'b'; });
     on('event', function () { echo 'c'; return false; }); // stop propagation
     on('event', function () { echo 'd'; });
-		
+    
     fire('event'); // print abc
-		
+    
 Get all events or listeners:
 
     $events = events();
