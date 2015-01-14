@@ -1,4 +1,4 @@
-# Sphido / Events
+# sphido / events
 
 Events is simple pure functional **event dispatching library** for PHP 5.5+ and have nice and clear interface with function `on()`, `off()`, `fire()`, `filter()`, `handle()`, `once()`, `listeners()`, `events()` - that's all.
 
