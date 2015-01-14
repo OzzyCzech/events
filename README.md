@@ -10,7 +10,7 @@ With events can:
 - stop propagation in function chain
 - and have default handler
 
-[![Build Status](https://travis-ci.org/sphido/events.png?branch=master)](https://travis-ci.org/sphido/events) [![Latest Stable Version](https://poser.pugx.org/sphido/events/v/stable.png)](https://packagist.org/packages/sphido/events) [![Total Downloads](https://poser.pugx.org/sphido/events/downloads.png)](https://packagist.org/packages/sphido/events) [![Latest Unstable Version](https://poser.pugx.org/sphido/events/v/unstable.png)](https://packagist.org/packages/sphido/events) [![License](https://poser.pugx.org/sphido/events/license.png)](https://packagist.org/packages/sphido/events)
+[![Build Status](https://travis-ci.org/sphido/events.png?branch=master)](https://travis-ci.org/sphido/events) [![Latest Stable Version](https://poser.pugx.org/sphido/events/v/stable.svg)](https://packagist.org/packages/sphido/events) [![Total Downloads](https://poser.pugx.org/sphido/events/downloads.svg)](https://packagist.org/packages/sphido/events) [![Latest Unstable Version](https://poser.pugx.org/sphido/events/v/unstable.svg)](https://packagist.org/packages/sphido/events) [![License](https://poser.pugx.org/sphido/events/license.svg)](https://packagist.org/packages/sphido/events)
 
 
 ## Fire event
