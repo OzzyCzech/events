@@ -1,7 +1,5 @@
 <?php
 /**
- * Hardcore simple functional oriented events for PHP.
- *
  * @author Roman Ozana <ozana@omdesign.cz>
  */
 
