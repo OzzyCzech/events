@@ -5,7 +5,6 @@
 use Tester\Assert;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../src/events.php';
 \Tester\Environment::setup();
 
 { // some listeners
@@ -41,11 +40,11 @@ require __DIR__ . '/../src/events.php';
 { // event params
 	on(
 		'event2', function ($a, $b, $c) {
-			Assert::same('1', $a);
-			Assert::same('2', $b);
-			Assert::same('3', $c);
-			return func_get_args();
-		}
+		Assert::same('1', $a);
+		Assert::same('2', $b);
+		Assert::same('3', $c);
+		return func_get_args();
+	}
 	);
 
 	Assert::same([['1', '2', '3']], fire('event2', '1', '2', '3'));

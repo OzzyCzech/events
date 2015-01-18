@@ -5,7 +5,6 @@
 use Tester\Assert;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../src/events.php';
 \Tester\Environment::setup();
 
 
@@ -15,9 +14,9 @@ require __DIR__ . '/../src/events.php';
 
 	on(
 		'set.true', function () {
-			global $var;
-			$var = true;
-		}
+		global $var;
+		$var = true;
+	}
 	);
 
 	fire('set.true');
@@ -29,8 +28,8 @@ require __DIR__ . '/../src/events.php';
 
 	add_filter(
 		'var', function () {
-			return true;
-		}
+		return true;
+	}
 	);
 
 	Assert::true(filter('var', false));

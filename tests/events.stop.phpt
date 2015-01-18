@@ -5,7 +5,7 @@
 use Tester\Assert;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../src/events.php';
+
 \Tester\Environment::setup();
 
 
@@ -14,16 +14,16 @@ require __DIR__ . '/../src/events.php';
 	$calls = 0;
 	on(
 		'nonstop', function () {
-			global $calls;
-			$calls++;
-			return '0'; // return something else then false
-		}
+		global $calls;
+		$calls++;
+		return '0'; // return something else then false
+	}
 	);
 	on(
 		'nonstop', function () {
-			global $calls;
-			$calls++;
-		}
+		global $calls;
+		$calls++;
+	}
 	);
 	fire('nonstop');
 	Assert::same(2, $calls);
@@ -35,16 +35,16 @@ require __DIR__ . '/../src/events.php';
 	$calls = 0;
 	on(
 		'stop', function () {
-			global $calls;
-			$calls++;
-			return false; // stop propagation
-		}
+		global $calls;
+		$calls++;
+		return false; // stop propagation
+	}
 	);
 	on(
 		'stop', function () {
-			global $calls;
-			$calls++;
-		}
+		global $calls;
+		$calls++;
+	}
 	);
 	fire('stop');
 	Assert::same(1, $calls);

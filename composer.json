@@ -17,6 +17,11 @@
       "email": "ozana@omdesign.cz"
     }
   ],
+  "autoload": {
+    "files": [
+      "src/events.php"
+    ]
+  },
   "require": {
     "php": ">=5.5.6"
   },
