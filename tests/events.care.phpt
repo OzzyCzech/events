@@ -8,9 +8,9 @@ require __DIR__ . '/../vendor/autoload.php';
 \Tester\Environment::setup();
 
 
-{ // default handler test
+{ // default carer test
 
-	$response = handle(
+	$response = care(
 		'render', function () {
 		return 'default renderer';
 	}
@@ -19,15 +19,15 @@ require __DIR__ . '/../vendor/autoload.php';
 	Assert::same('default renderer', $response);
 }
 
-{ // override default handler test
+{ // override default carer test
 	on(
 		'render', function () {
-		global $handler;
-		return $handler = 'new renderer';
+		global $carer;
+		return $carer = 'new renderer';
 	}
 	);
 
-	$response = handle(
+	$response = care(
 		'render', function () {
 		return 'default renderer';
 	}
@@ -36,9 +36,9 @@ require __DIR__ . '/../vendor/autoload.php';
 	Assert::same('new renderer', $response);
 }
 
-{ // handler variables
+{ // carer variables
 
-	$response = handle(
+	$response = care(
 		'variables', function ($data) {
 		return $data;
 	}, 'an example data'
@@ -52,7 +52,7 @@ require __DIR__ . '/../vendor/autoload.php';
 	}
 	);
 
-	$response = handle(
+	$response = care(
 		'variables', function ($data) {
 		return $data;
 	}, 'an example data'

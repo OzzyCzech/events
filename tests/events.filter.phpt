@@ -53,3 +53,5 @@ on(
 
 Assert::same(['add'], filter('event2'));
 Assert::same(['a', 'b', 'c', 'add'], filter('event2', ['a', 'b', 'c']));
+
+// return false from filter

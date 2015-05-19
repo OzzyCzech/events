@@ -45,12 +45,12 @@ function on($event, callable $listener = null, $priority = 10) {
  * @param int $priority
  */
 function once($event, callable $listener, $priority = 10) {
-	$onceListener = function () use (&$onceListener, $event, $listener) {
-		off($event, $onceListener);
-		call_user_func_array($listener, func_get_args());
+	$once = function () use (&$once, $event, $listener) {
+		off($event, $once);
+		return call_user_func_array($listener, func_get_args());
 	};
 
-	on($event, $onceListener, $priority);
+	on($event, $once, $priority);
 }
 
 /**
@@ -95,20 +95,19 @@ function fire($event) {
 }
 
 /**
- * Care about something
+ * Care about something by default event listener.
  *
  * @param string $event
  * @param callable $listener
  * @return mixed
  */
-function handle($event, callable $listener = null) {
+function care($event, callable $listener = null) {
 	if ($listener) on($event, $listener, 0); // register default listener
 
 	if ($listeners = listeners($event)) {
 		return call_user_func_array(end($listeners), array_slice(func_get_args(), 2));
 	}
 }
-
 
 /**
  * Pass variable with all filters.

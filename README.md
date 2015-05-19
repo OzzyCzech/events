@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.org/sphido/events.svg?branch=master)](https://travis-ci.org/sphido/events) [![Latest Stable Version](https://poser.pugx.org/sphido/events/v/stable.svg)](https://packagist.org/packages/sphido/events) [![Total Downloads](https://poser.pugx.org/sphido/events/downloads.svg)](https://packagist.org/packages/sphido/events) [![Latest Unstable Version](https://poser.pugx.org/sphido/events/v/unstable.svg)](https://packagist.org/packages/sphido/events) [![License](https://poser.pugx.org/sphido/events/license.svg)](https://packagist.org/packages/sphido/events)
 
-Events is simple pure functional **event dispatching library** for PHP 5.5+ and have nice and clear interface with function `on()`, `off()`, `fire()`, `filter()`, `care()`, `once()`, `listeners()`, `events()` - that's all.
+Events is simple pure functional **event dispatching library** for PHP 5.5+ and have nice and clear interface with function `on()`, `off()`, `fire()`, `filter()`, `care()`, `once()`, `listeners()`, `events()` - that's all!
 
 With events can:
 
-- prioritizing listeners
+- listeners prioritization
 - add/remove listeners
 - filter values by functions
 - stop propagation in function chain
@@ -24,25 +24,16 @@ fire('event'); // print wow it's works yeah!
 
 Function `fire()` return array of all callback listeners results.
 
-## Prioritizing listeners
+## Listeners prioritization
 
 ```php
-on(
-	'event', function () {
-		echo " stay hungry";
-	}, 200
-);
+on(	'event', function () { echo " stay hungry"; }, 200);
+on(	'event', function () { echo "stay foolish"; }, 100);
 
-on(
-	'event', function () {
-		echo "stay foolish";
-	}, 100
-);
-
-fire('event'); // print stay foolish stay hungry
+fire('event'); // print "stay foolish stay hungry"
 ```
 
-**Please notice that default event priority is 10!**
+> Notice: **default event priority is 10!**
 
 ## Filter - change value by listeners
 
@@ -64,31 +55,28 @@ echo filter('price', 100); // print The price is: 100 USD
 
 This function it's basically copy of Wordpress [add_filter](http://codex.wordpress.org/Function_Reference/add_filter) and [apply_filters](http://codex.wordpress.org/Function_Reference/apply_filters) functions.
 
-## Handle - overide default listeners
+## Care handler
 
-Return result of last hang callback function to event. Can be useful if you need have some default handler there which can be possible overridden by something else.
-
+Sometimes you need *care about something* by default function, but need allow overridden that function by something else.
+ 
 ```php
-on(
-  'render', function () {
-    return 'my custom renderer';
-  }
-);
+on('render', function () { echo 'my custom renderer'; });
 
-echo handle(
-  'render', function () {
-    return 'default renderer';
-  }
-); // print my custom renderer
+echo care('render', function () {
+  return 'default renderer';
+});
+// print "my custom renderer"
+
 ```    
     
 ## Remove listener from event
+
 Add and remove listener:
 
 ```php
 $handler = function() { };
-on('event', $handler);
-off('event', $handler);
+on('event', $handler); // add
+off('event', $handler); // remove
 ```
 
 Add and remove all listeners:
@@ -98,8 +86,18 @@ $handler = function() { };
 on('event', $handler);
 on('event', $handler);
 on('event', $handler);
-off('event');
+off('event'); // remove all listeners
 ```
+
+## Call listener just once
+ 
+ ```php
+once('event', function(){ echo "called me once"; });
+ 
+fire('event'); // will print "called me once" 
+fire('event'); // will print nothing
+```
+
 
 ## Stop propagation example
 
@@ -112,7 +110,7 @@ on('event', function () { echo 'd'; });
 fire('event'); // print abc
 ```
 
-## Getting events or listeners
+## Getting listeners array
 
 Getting events static `stdClass`:
 
@@ -127,9 +125,4 @@ Getting listeners array:
 listeners('hook'); // return hook listeners
 ```
     
-For more examples [visit tests](https://github.com/sphido/events/tree/master/tests). 
-
-
-## TODO
-
-- handle rename to care
+For more examples [visit tests](https://github.com/sphido/events/tree/master/tests).
