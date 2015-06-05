@@ -95,13 +95,13 @@ function fire($event) {
 }
 
 /**
- * Care about something by default event listener.
+ * Ensure that something will be handled
  *
  * @param string $event
  * @param callable $listener
  * @return mixed
  */
-function care($event, callable $listener = null) {
+function ensure($event, callable $listener = null) {
 	if ($listener) on($event, $listener, 0); // register default listener
 
 	if ($listeners = listeners($event)) {

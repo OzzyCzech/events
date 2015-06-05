@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/sphido/events.svg?branch=master)](https://travis-ci.org/sphido/events) [![Latest Stable Version](https://poser.pugx.org/sphido/events/v/stable.svg)](https://packagist.org/packages/sphido/events) [![Total Downloads](https://poser.pugx.org/sphido/events/downloads.svg)](https://packagist.org/packages/sphido/events) [![Latest Unstable Version](https://poser.pugx.org/sphido/events/v/unstable.svg)](https://packagist.org/packages/sphido/events) [![License](https://poser.pugx.org/sphido/events/license.svg)](https://packagist.org/packages/sphido/events)
 
-Events is simple pure functional **event dispatching library** for PHP 5.5+ and have nice and clear interface with function `on()`, `off()`, `fire()`, `filter()`, `care()`, `once()`, `listeners()`, `events()` - that's all!
+Events is simple pure functional **event dispatching library** for PHP 5.5+ and have nice and clear interface with function `on()`, `off()`, `fire()`, `filter()`, `ensure()`, `once()`, `listeners()`, `events()` - that's all!
 
 With events can:
 
@@ -55,14 +55,14 @@ echo filter('price', 100); // print The price is: 100 USD
 
 This function it's basically copy of Wordpress [add_filter](http://codex.wordpress.org/Function_Reference/add_filter) and [apply_filters](http://codex.wordpress.org/Function_Reference/apply_filters) functions.
 
-## Care handler
+## Ensure handler
 
-Sometimes you need *care about something* by default function, but need allow overridden that function by something else.
+Sometimes you need *ensure* that something will be handled by default function, but need allow overridden that function by something else.
  
 ```php
 on('render', function () { echo 'my custom renderer'; });
 
-echo care('render', function () {
+echo ensure('render', function () {
   return 'default renderer';
 });
 // print "my custom renderer"
