@@ -34,7 +34,7 @@ require __DIR__ . '/../vendor/autoload.php';
 	Assert::same('b', $listeners[1]());
 	Assert::same('a', $listeners[2]());
 
-	Assert::same(['c', 'b', 'a'], fire('event'));
+	Assert::same(['c', 'b', 'a'], trigger('event'));
 }
 
 { // event params
@@ -47,7 +47,7 @@ require __DIR__ . '/../vendor/autoload.php';
 	}
 	);
 
-	Assert::same([['1', '2', '3']], fire('event2', '1', '2', '3'));
+	Assert::same([['1', '2', '3']], trigger('event2', '1', '2', '3'));
 }
 
 { // remove all listeners
@@ -58,12 +58,12 @@ require __DIR__ . '/../vendor/autoload.php';
 }
 
 { // trigger output
-	Assert::same([], fire('what ever you want'));
+	Assert::same([], trigger('what ever you want'));
 
 	on('output', $a);
 	on('output', $b);
 	on('output', $false);
 	on('output', $c);
-	Assert::same(['a', 'b', false], fire('output'));
+	Assert::same(['a', 'b', false], trigger('output'));
 }
 

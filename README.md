@@ -2,27 +2,27 @@
 
 [![Build Status](https://travis-ci.org/sphido/events.svg?branch=master)](https://travis-ci.org/sphido/events) [![Latest Stable Version](https://poser.pugx.org/sphido/events/v/stable.svg)](https://packagist.org/packages/sphido/events) [![Total Downloads](https://poser.pugx.org/sphido/events/downloads.svg)](https://packagist.org/packages/sphido/events) [![Latest Unstable Version](https://poser.pugx.org/sphido/events/v/unstable.svg)](https://packagist.org/packages/sphido/events) [![License](https://poser.pugx.org/sphido/events/license.svg)](https://packagist.org/packages/sphido/events)
 
-Events is simple pure functional **event dispatching library** for PHP 5.5+ and have nice and clear interface with function `on()`, `off()`, `fire()`, `filter()`, `ensure()`, `once()`, `listeners()`, `events()` - that's all!
+Events is simple pure functional **event dispatching library** for PHP 5.5+ and have nice and clear interface with function `on()`, `one()`, `off()`, `trigger()`, `filter()`, `ensure()`, `listeners()`, `events()` - that's all!
 
-With events can:
+With **sphido/events** can:
 
 - listeners prioritization
 - add/remove listeners
 - filter values by functions
 - stop propagation in function chain
-- and have default handler
+- and have event default handler
 
-## Fire event
+## Trigger event
 
 ```php
 on('event', function () {
   echo "wow it's works yeah!";
 });
 
-fire('event'); // print wow it's works yeah!
+trigger('event'); // print wow it's works yeah!
 ```
 
-Function `fire()` return array of all callback listeners results.
+Function `trigger()` return array of all callback listeners results.
 
 ## Listeners prioritization
 
@@ -30,7 +30,7 @@ Function `fire()` return array of all callback listeners results.
 on(	'event', function () { echo " stay hungry"; }, 200);
 on(	'event', function () { echo "stay foolish"; }, 100);
 
-fire('event'); // print "stay foolish stay hungry"
+trigger('event'); // print "stay foolish stay hungry"
 ```
 
 > Notice: **default event priority is 10!**
@@ -57,7 +57,7 @@ This function it's basically copy of Wordpress [add_filter](http://codex.wordpre
 
 ## Ensure handler
 
-Sometimes you need *ensure* that something will be handled by default function, but need allow overridden that function by something else.
+Sometimes you need *ensure* that will be handled by some default function, but need allow overridden that function by something else.
  
 ```php
 on('render', function () { echo 'my custom renderer'; });
@@ -91,23 +91,22 @@ off('event'); // remove all listeners
 
 ## Call listener just once
  
- ```php
-once('event', function(){ echo "called me once"; });
+```php
+one('event', function(){ echo "called me once"; });
  
-fire('event'); // will print "called me once" 
-fire('event'); // will print nothing
+trigger('event'); // will print "called me once" 
+trigger('event'); // will print nothing
 ```
-
 
 ## Stop propagation example
 
 ```php
 on('event', function () { echo 'a'; });
 on('event', function () { echo 'b'; });
-on('event', function () { echo 'c'; return false; }); // stop propagation
+on('event', function () { echo 'c'; return false; }); // stop propagation now
 on('event', function () { echo 'd'; });
 
-fire('event'); // print abc
+trigger('event'); // print abc
 ```
 
 ## Getting listeners array

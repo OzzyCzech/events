@@ -14,9 +14,9 @@ require __DIR__ . '/../vendor/autoload.php';
 		return 'just once';
 	};
 
-	once('once event', $onceFunction);
+	one('once event', $onceFunction);
 
-	Assert::equal(['just once'], fire('once event'));
-	Assert::equal([], fire('once event'));
+	Assert::equal(['just once'], trigger('once event'));
+	Assert::equal([], trigger('once event'));
 
 }

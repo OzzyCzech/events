@@ -25,7 +25,7 @@ require __DIR__ . '/../vendor/autoload.php';
 		$calls++;
 	}
 	);
-	fire('nonstop');
+	trigger('nonstop');
 	Assert::same(2, $calls);
 }
 
@@ -46,6 +46,6 @@ require __DIR__ . '/../vendor/autoload.php';
 		$calls++;
 	}
 	);
-	fire('stop');
+	trigger('stop');
 	Assert::same(1, $calls);
 }

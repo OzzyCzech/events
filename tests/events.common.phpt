@@ -19,7 +19,7 @@ require __DIR__ . '/../vendor/autoload.php';
 	}
 	);
 
-	fire('set.true');
+	trigger('set.true');
 
 	Assert::true($var);
 }

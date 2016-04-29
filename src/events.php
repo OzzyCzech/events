@@ -44,7 +44,7 @@ function on($event, callable $listener = null, $priority = 10) {
  * @param callable $listener
  * @param int $priority
  */
-function once($event, callable $listener, $priority = 10) {
+function one($event, callable $listener, $priority = 10) {
 	$once = function () use (&$once, $event, $listener) {
 		off($event, $once);
 		return call_user_func_array($listener, func_get_args());
@@ -82,7 +82,7 @@ function off($event, callable $listener = null) {
  * @param $event
  * @return array
  */
-function fire($event) {
+function trigger($event) {
 	$args = func_get_args();
 	$event = array_shift($args);
 
@@ -92,21 +92,6 @@ function fire($event) {
 	}
 
 	return $out;
-}
-
-/**
- * Ensure that something will be handled
- *
- * @param string $event
- * @param callable $listener
- * @return mixed
- */
-function ensure($event, callable $listener = null) {
-	if ($listener) on($event, $listener, 0); // register default listener
-
-	if ($listeners = listeners($event)) {
-		return call_user_func_array(end($listeners), array_slice(func_get_args(), 2));
-	}
 }
 
 /**
@@ -128,46 +113,6 @@ function filter($event, $value = null) {
 	return $value;
 }
 
-// ---------------------------------------------------- aliases ---------------------------------------------------- //
-
-/**
- * Trigger an action.
- *
- * @param $event
- * @return mixed
- */
-function action($event) {
-	return call_user_func_array('\fire', func_get_args());
-}
-
-/**
- * Trigger an action.
- *
- * @param $event
- * @return mixed
- */
-function trigger($event) {
-	return call_user_func_array('\fire', func_get_args());
-}
-
-/**
- * @param $event
- * @param callable $listener
- * @param int $priority
- */
-function add_action($event, callable $listener, $priority = 10) {
-	on($event, $listener, $priority);
-}
-
-/**
- * @param $event
- * @param callable $listener
- * @param int $priority
- */
-function add_listener($event, callable $listener, $priority = 10) {
-	on($event, $listener, $priority);
-}
-
 /**
  * @param $event
  * @param callable $listener
@@ -175,4 +120,19 @@ function add_listener($event, callable $listener, $priority = 10) {
  */
 function add_filter($event, callable $listener, $priority = 10) {
 	on($event, $listener, $priority);
+}
+
+/**
+ * Ensure that something will be handled
+ *
+ * @param string $event
+ * @param callable $listener
+ * @return mixed
+ */
+function ensure($event, callable $listener = null) {
+	if ($listener) on($event, $listener, 0); // register default listener
+
+	if ($listeners = listeners($event)) {
+		return call_user_func_array(end($listeners), array_slice(func_get_args(), 2));
+	}
 }
