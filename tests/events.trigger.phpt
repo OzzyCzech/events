@@ -67,3 +67,12 @@ require __DIR__ . '/../vendor/autoload.php';
 	Assert::same(['a', 'b', false], trigger('output'));
 }
 
+
+{ // Trigger multiple events at once
+
+	on('one', function () { return true; });
+	on('two', function () { return true; });
+	on('three', function () {return true; });
+
+	Assert::same([true, true, true], trigger(['one', 'two', 'three']));
+}

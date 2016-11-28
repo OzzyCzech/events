@@ -109,6 +109,26 @@ on('event', function () { echo 'd'; });
 trigger('event'); // print abc
 ```
 
+## Trigger multiple events at once
+
+```php
+on('one', function () { echo 'you know that: ';});
+on('two', function ($a, $b) { echo " $a is not $b ";});
+
+trigger(['one', 'two'], 100, 200); // print 'you know that: 100 is not 200'
+```
+
+
+## Apply multiple filters at once
+
+```php
+add_filter('one', function ($array) { return array_sum($array);});
+add_filter('two', function ($value) { return 'Suma is ' . $value;});
+
+filter(['one', 'two'], [10, 20, 30, 40])); // output will be 'Suma is 100'
+```
+
+
 ## Getting listeners array
 
 Getting events static `stdClass`:

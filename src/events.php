@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Roman Ozana <ozana@omdesign.cz>
+ * @author Roman Ožana <ozana@omdesign.cz>
  */
 
 /**
@@ -79,16 +79,16 @@ function off($event, callable $listener = null) {
 /**
  * Trigger events
  *
- * @param $event
+ * @param string|array $events
+ * @param array $args
  * @return array
  */
-function trigger($event) {
-	$args = func_get_args();
-	$event = array_shift($args);
-
+function trigger($events, ...$args) {
 	$out = [];
-	foreach ((array)listeners($event) as $listener) {
-		if (($out[] = call_user_func_array($listener, $args)) === false) break; // return false ==> stop propagation
+	foreach ((array)$events as $event) {
+		foreach ((array)listeners($event) as $listener) {
+			if (($out[] = call_user_func_array($listener, $args)) === false) break; // return false ==> stop propagation
+		}
 	}
 
 	return $out;
@@ -97,19 +97,19 @@ function trigger($event) {
 /**
  * Pass variable with all filters.
  *
- * @param $event
+ * @param string|array $events
  * @param null $value
+ * @param array $args
  * @return mixed|null
+ * @internal param null $value
  */
-function filter($event, $value = null) {
-	$args = func_get_args();
-	$event = array_shift($args);
-
-	foreach ((array)listeners($event) as $listener) {
-		$args[0] = $value;
-		$value = call_user_func_array($listener, $args);
+function filter($events, $value = null, ...$args) {
+	array_unshift($args, $value);
+	foreach ((array)$events as $event) {
+		foreach ((array)listeners($event) as $listener) {
+			$args[0] = $value = call_user_func_array($listener, $args);
+		}
 	}
-
 	return $value;
 }
 

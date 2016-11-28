@@ -54,4 +54,39 @@ on(
 Assert::same(['add'], filter('event2'));
 Assert::same(['a', 'b', 'c', 'add'], filter('event2', ['a', 'b', 'c']));
 
-// return false from filter
+{ // sum values in two filters
+	add_filter(
+		'sum_args_and_values',
+		function ($value, $one, $two, $three) {
+			return $value + $one + $two;
+		}
+	);
+
+	add_filter(
+		'sum_args_and_values',
+		function ($value, $one, $two, $three) {
+			return $value + $three;
+		}
+	);
+
+	Assert::same(1000, filter('sum_args_and_values', 100, 200, 300, 400));
+
+}
+
+{ // multiple times trigger same event on same data
+	add_filter(
+		'add_100',
+		function ($value) {
+			return $value + 100;
+		}
+	);
+	Assert::same(400, filter(['add_100', 'add_100', 'add_100'], 100));
+}
+
+{
+
+	add_filter('one', function ($array) { return array_sum($array);});
+	add_filter('two', function ($value) { return 'Suma is ' . $value;});
+
+	Assert::same('Suma is 100', filter(['one', 'two'], [10, 20, 30, 40]));
+}
