@@ -5,10 +5,8 @@
 
 /**
  * Return events object
- *
- * @return stdClass
  */
-function events() {
+function events(): stdClass {
 	static $events;
 	return $events ?: $events = new stdClass();
 }
@@ -19,7 +17,7 @@ function events() {
  * @param $event
  * @return mixed
  */
-function listeners($event) {
+function listeners(string $event) {
 	if (isset(events()->$event)) {
 		ksort(events()->$event);
 		return call_user_func_array('array_merge', events()->$event);
@@ -29,11 +27,11 @@ function listeners($event) {
 /**
  * Add event listener
  *
- * @param $event
+ * @param string $event
  * @param callable $listener
  * @param int $priority
  */
-function on($event, callable $listener = null, $priority = 10) {
+function on(string $event, callable $listener = null, int $priority = 10) {
 	events()->{$event}[$priority][] = $listener;
 }
 
@@ -44,7 +42,7 @@ function on($event, callable $listener = null, $priority = 10) {
  * @param callable $listener
  * @param int $priority
  */
-function one($event, callable $listener, $priority = 10) {
+function one(string $event, callable $listener, int $priority = 10) {
 	$once = function () use (&$once, $event, $listener) {
 		off($event, $once);
 		return call_user_func_array($listener, func_get_args());
@@ -60,8 +58,8 @@ function one($event, callable $listener, $priority = 10) {
  * @param callable $listener
  * @return bool
  */
-function off($event, callable $listener = null) {
-	if (!isset(events()->$event)) return;
+function off(string $event, callable $listener = null): bool {
+	if (!isset(events()->$event)) return false;
 
 	if ($listener === null) {
 		unset(events()->$event);
@@ -83,7 +81,7 @@ function off($event, callable $listener = null) {
  * @param array $args
  * @return array
  */
-function trigger($events, ...$args) {
+function trigger($events, ...$args): array {
 	$out = [];
 	foreach ((array)$events as $event) {
 		foreach ((array)listeners($event) as $listener) {
@@ -118,7 +116,7 @@ function filter($events, $value = null, ...$args) {
  * @param callable $listener
  * @param int $priority
  */
-function add_filter($event, callable $listener, $priority = 10) {
+function add_filter(string $event, callable $listener, $priority = 10) {
 	on($event, $listener, $priority);
 }
 
@@ -129,7 +127,7 @@ function add_filter($event, callable $listener, $priority = 10) {
  * @param callable $listener
  * @return mixed
  */
-function ensure($event, callable $listener = null) {
+function ensure(string $event, callable $listener = null) {
 	if ($listener) on($event, $listener, 0); // register default listener
 
 	if ($listeners = listeners($event)) {
