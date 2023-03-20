@@ -1,6 +1,6 @@
 <?php
 /**
- * @author Roman Ožana <ozana@omdesign.cz>
+ * @author Roman Ožana <roman@ozana.cz>
  */
 
 /**
