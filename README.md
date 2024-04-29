@@ -1,7 +1,5 @@
 # Sphido / Events
 
-[![Build Status](https://travis-ci.org/sphido/events.svg?branch=master)](https://travis-ci.org/sphido/events) [![Latest Stable Version](https://poser.pugx.org/sphido/events/v/stable.svg)](https://packagist.org/packages/sphido/events) [![Total Downloads](https://poser.pugx.org/sphido/events/downloads.svg)](https://packagist.org/packages/sphido/events) [![Latest Unstable Version](https://poser.pugx.org/sphido/events/v/unstable.svg)](https://packagist.org/packages/sphido/events) [![License](https://poser.pugx.org/sphido/events/license.svg)](https://packagist.org/packages/sphido/events)
-
 Events is simple pure functional **event dispatching library** for PHP 5.5+ and have nice and clear interface with function `on()`, `one()`, `off()`, `trigger()`, `filter()`, `ensure()`, `listeners()`, `events()` - that's all!
 
 With **sphido/events** can:
